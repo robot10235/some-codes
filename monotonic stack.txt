@@ -1,0 +1,39 @@
+316 
+402
+321
+1081
+共性：在保持元素相对位置不变的前提下，删除k个元素使得array变最大/小
+monotonic stack find the greedy order // the stack is not necessarily monotonic, because we need to making it to follow some rules
+
+
+经典·左右单调栈&共两次单调栈
+子数组最小最大值、范围和的问题基本都通用这个方法
+496 find the next greater element
+维护一个非递增栈，pop时说明找到next greater element，记录到ret。
+907 把每一个element作为最小值的区间划出来，需要用到496找next smaller element 和prev smaller element，求出子区间数，注意相同元素需要去重区间。
+2104 求出907sum of subarray minimums 和 sum of subarray maximum，然后将它们相减即可
+1856 类似907，把每一个element作为最小值的区间划出来，需要用到496找next smaller element idx 和 prev smaller element idx。然后用
+prefix sum 求出子区间和，对于每个element构成的区间，求出乘积值然后找最大的
+84 类似907，把每一个element作为最小值的区间划出来，需要用到496找next smaller element idx 和 prev smaller element idx。
+但不一样的是考虑相同元素去重区间，因为我们要找一个而不是多个，不用考虑重复，相反的要去找最长的，其他类似上面
+85 for every row i build monotonic stack like 84 to find the largest rectangle
+1727 转换成84的直方图，思路类似85，不用建栈，只需要sort。注意没有顺序要求时不用单调栈
+1793 记录所有的next/prev smaller element，然后从起点开始，从大到小依次求出最小值乘以子区间长度，并记录最大值。
+2281. 同样算出next / prev smaller element，但是更关键的是要算出 [left, ..., i, ... ,right] 这个的和，要用数学公式推导一下
+
+面试题03.05. 和 232. Implement Queue using Stacks 还有 implements stack using Queues 以及 Min Stack。
+思考的切入角度都是一样的。 具体地， 就是采用增量法。就比如这题。 
+你假设你的 主stack已经是满足sorted stack 的 性質了。 
+我们需要思考的就是当你来一个新的元素的时候， 怎么借用辅助栈/队列，来维持这个性质。 
+对于这个题目，就是你需要将比它大的元素先放到辅助栈中，然后把目标值存入主栈中， 然后 再把辅助栈的元素放回来。
+可以用同样的增量法的哲学做一下 232。
+
+
+1039 dp：剖分 dp(i, j) = dp(i, k) + dp(k, j) + A[i] * A[j] * A[k]
+1130 greedy: （如果可以sort array）把相邻的数字两两相乘并加起来。不能sort，遇到一个大的数，希望尽可能地少乘
+dp：剖分，dp[i][j] = dp[i][k] + dp[k][j] + maxval[i][k] * maxval[k][j]
+
+
+1696 找dp[i-k]  dp[i-k+1]  dp[i-k+2]  ...  dp[i-1] 的最大值
+用deque，如果i - deque.front == k, deque.pop_front()
+然后用deque维护一个非递增的单调栈，这样永远都能找到最大值

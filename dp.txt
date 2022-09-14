@@ -1,0 +1,25 @@
+区间dp1130 monotonic stack（trick）/  区间dp，将一个大的区间分成两个小的区间和两个小区间的最大数的乘积的和
+1259 同理，每划出一条线就会划分出两个图，将他们的可能数乘起来并加在一起
+
+1798 consecutive --》dp  要先sort再dp！！！！
+
+1143 模板经典题，找subarray的palindrome。找两个字符串的公共子串的长度，用dp[i][j] = max(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]+1) 来做
+
+873 dp的下标可以是组合状态，上一个状态和当前状态组合起来
+
+1690 博弈论（game theory）dp[i][j] 表示array[i:j]alice比bob赢的分数
+
+1463 两个人在矩阵里面从上往下走，dp[k][i][j] 表示第k行第一人在第i列，第二人在第j列的情况
+dp[k][i][j] = max(dp[k-1][i-1][j-1], dp[k-1][i-1][j], ..., dp[k-1][i+1][j+1]) 可以用滚动数组来优化
+
+805 01knapsack 
+类似题目：416分割等和子集。背包size=sum/2
+
+
+940 subsequence题
+找出所有distinct subsequence的数量
+如果没有重复，可以想到2^n-1
+但是出现重复，可以想到2*dp[n-1] 之后再减去dp[x-1]，其中x为最近出现重复字母的位置。
+
+1686 stone game game theory 但是不使用dp而是用greedy，要想到你选择了这个石头的同时对面无法选择，因此要选择加起来价值最大的，
+最大化自己分数，最小化别人分数

@@ -1,0 +1,12 @@
+780. Reaching Points 
+idea: backward traverse    start from (tx, ty) to (sx, sy)    if tx > ty:    tx -= ty     else: ty -= tx    we can subtract multiple tx/ty to speed up
+rule is simple but scale: 1 <= sx, sy, tx, ty <= 10^9 is huge		consider directly find
+rule is complex but scale: 1 <= sx, sy, tx, ty <= 10^4 is small		consider backtracking
+
+
+974. Subarray Sums Divisible by K
+naive approach:
+prefix sum find all pairs (i, j) and find if the sum of nums[i: j] is divisible by k O(n^2)
+
+improve:
+for every subarray ending in j, we find the counts of sum s of nums[0: i], making sum of nums[0: j] (t - s) % k == 0.

@@ -1,0 +1,5 @@
+444
+nums can be seen as the topological order
+1 -> 2 -> 3
+we actually want 1 -> 2 and 2 -> 3
+hence, we just find the adjacent elements in nums are in the subseq in sequence in sequences

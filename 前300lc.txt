@@ -1,0 +1,127 @@
+218. The Skyline Problem
+the left edge point should be increasing and the right point should be decreasing
+
+235. Lowest Common Ancestor of a Binary Search Tree
+if p q are not on the same side of the current node, return current node
+if p q are on the same side, current node goes to the same side
+we can easily find if p q are on the same side in BST, just comparing their value with current node
+
+236. Lowest Common Ancestor of a Binary Tree
+since we can not easily find if p q is on the same side, we need to use post order to find the last side with two nodes
+
+241. Different Ways to Add Parentheses
+backtracking + memory
+for every operator, choose it as the last opeartion in this expression
+for its left side and right side, recursively get the result array (vector)
+and then add / subtract / multiply them together
+
+253. Meeting Rooms II
+Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.
+actually we just need to find the count of maximum overlapping intervals. We should use that method.
+
+254. Factor Combinations
+key: how to remove duplicates?
+for n and the factor k, for the next recursion n/k, we need to find the factor started from k, not 2
+
+255. Verify Preorder Sequence in Binary Search Tree
+if current value is greater than the previous one
+it means that we are going to the right subtree
+and the next value should be greater than the previous value / root value
+use a stack, when we need to pop a value when it is smaller than the current one
+we mark the pop value as the root value, and next number we visit should be greater than that
+otherwise, it is not a BST
+
+
+258. num = 100a + 10b + c = 99a + 9b + (a+b+c)；所以对9取余即可。
+
+259. 3Sum Smaller
+first sort the array
+1. binary search: given i and j find k which is the last element making a[i] + a[j] + a[k] < target, in which k > j
+2. two ptrs given i, two ptrs find j and k. when we move j, need to add once more
+
+261. Graph Valid Tree
+union find can find the connectivity of a graph
+and a tree needs to have n-1 edges
+
+264. Ugly Number
+three ptrs: for a pointed number, it can multiply 2 / 3 / 5.
+if the multiplication is the new ugly number, move the ptrs.
+
+269. Alien Dictionary
+topological sort but the key is how to generate edges
+for each adjacent strings, we find the first different letter in the same index, then we can generate that str[ i ][ j ] -> str[ i+1 ][ j ]
+after generating edges, we need to use topological sort to find the order. 
+remember topological sort is to first remove zero indegree nodes
+
+272. Closest Binary Search Tree Value II
+two stack / two ptr 
+one stack / one ptr stores smaller than target
+one stack / one ptr stores greater than target
+
+274. H-Index
+binary search 不要想得太复杂
+
+276. painting fences
+思路：一部分一部分找，要满足后三个不连续，那么可以看成后两个连续或者后两个都不连续
+dp[i] = dp[i-1] * (k-1) + dp[i-2] * (k-2)
+
+277. Find the Celebrity
+always find the celebrity, if current candidate knows nobody, he might be the celebrity
+else the people who has greater number is the next candidate. We dont need to search the smaller number
+since the smaller number has been proven that they are not celebrity
+
+279. Perfect Squares  (num = sq1 + sq2 + ... + sqk) minimize k
+1: dp[i] = min (dp[i], dp[i-sq])
+2: bfs
+
+280. wiggle sort
+direct greedy instinct...
+one pass if not
+
+282. Expression Add Operators
+The key is that we should compute the expression also save the last number in the expression to be used for multiplication
+expr[signIndex] = '+'; backtrack(expr, j + 1, res + val, val);
+expr[signIndex] = '-'; backtrack(expr, j + 1, res - val, -val);
+expr[signIndex] = '*'; backtrack(expr, j + 1, res - mul + mul * val, mul * val);
+
+284. Peeking Iterator
+need to use the base class function
+
+285. Inorder Successor in BST
+iterative approach: use stack to simulate inorder. 
+first push all left child into stack.
+then pop / visit all nodes in the stack which does not have right child
+if one node has a right child, pop / visit it and then push the right child into the stack
+loop again
+
+287. Find the Duplicate Number 要与268区分开来，268是只有1个数是missing的，而287可能有多个数missing
+key point: the array size is n+1, and the number is [1, n]
+which means that the elements can be represented as the next element in the graph
+since it exists only one duplicate number, we can see that the graph exists a circle. 
+To detect the circle, we can use two ptrs to solve it.
+
+291. Word Pattern II
+backtrack
+
+292. Nim Game
+!(n % 4 == 0) find the pattern
+
+294. Flip Game II
+Game theory
+actually in the next turn, we need to go to the lose result.
+
+295. Find Median from Data Stream
+
+296. Best Meeting Point
+naive approach: for every (i,j), compute the total sum. O(n^4)
+improvements: for every i, compute partial dist of y, for every j, compute partial dist of x, at last (i,j) compute together. O(n^3) for parital dist
+more improvement: we actually dont need to store position of every node, we just store counts in each row i and row j, O(n^2)
+
+297. Serialize and Deserialize Binary Tree
+it does not mean you need to follow the rule of leetcode serialization, you can make a rule which is faster and smaller.
+bfs:
+preorder:
+
+298. Binary Tree Longest Consecutive Sequence
+postorder find longest consecutive sequence length started from current node
+find the maximum length in all nodes

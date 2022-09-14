@@ -1,0 +1,56 @@
+经典·左右单调栈&共两次单调栈
+子数组最小最大值、范围和的问题基本都通用这个方法
+496 find the next greater element
+维护一个非递增栈，pop时说明找到next greater element，记录到ret。
+907 把每一个element作为最小值的区间划出来，需要用到496找next smaller element 和prev smaller element，求出子区间数，注意相同元素需要去重区间。
+2104 求出907sum of subarray minimums 和 sum of subarray maximum，然后将它们相减即可
+1856 类似907，把每一个element作为最小值的区间划出来，需要用到496找next smaller element idx 和 prev smaller element idx。然后用
+prefix sum 求出子区间和，对于每个element构成的区间，求出乘积值然后找最大的
+84 类似907，把每一个element作为最小值的区间划出来，需要用到496找next smaller element idx 和 prev smaller element idx。
+但不一样的是考虑相同元素去重区间，因为我们要找一个而不是多个，不用考虑重复，相反的要去找最长的，其他类似上面
+
+828. Count Unique Characters of All Substrings of a Given String
+注意与下面不同的是计算次数时substring里的字母必须只能出现一次。
+我们需要记录每个字母最后一次出现的位置和倒数第二次（初始化为-1）出现的位置。
+加入新字母后，我们需要考虑它是否是distinct在整个字符串，
+如果是，直接cnts[i] = cnts[i-1] + 1 + i
+如果不是，需要知道最后一次出现的位置k，那么k+1 ... i 是没有这个字母的，那么就要加上 i - k 个新字母，
+但由于出现重复的字母，记倒数第二次出现的位置为k'，那么k'+1 ... k的这个字母会重复，需要减去 k - k'
+
+828变种 substrings 里的所有字母数量
+btw 子数组的题目该怎么写
+//amazon笔试 2022/06/08
+//第一题 判断密码强度,例如"good",所有子串为
+// g o o d go oo od goo ood good
+// 1 1 1 1  2   1    2    2     2     3	
+// 求和为16，返回16
+    int uniqueLetterString(string s) {
+        int n = s.size();
+        vector<int> pos(26, -1);
+        vector<int> cnts(n+1, 0);
+        for (int i = 0; i < n; ++i) {
+            if (pos[s[i]-'A'] == -1) {
+                cnts[i+1] = cnts[i] + i+1;
+            }
+            else {
+                cnts[i+1] = cnts[i] + i-pos[s[i]-'A'];
+            }
+            pos[s[i]-'A'] = i;
+        }
+        return accumulate(cnts.begin(), cnts.end(), 0);
+    }
+
+
+560 prefix sum + hash table 转化为two sum，注意的是prefix sum有时是可以边计算ret边求prefix的！不用另开prefix数组
+713 类似560，但要用two ptrs做，因为它是单调的，而560不一定是单调的，所以不能用two ptr做
+
+1043 partition-array-for-maximum-sum: backtracking + memo
+
+1416 对于「求出方案数」的题目，我们一般可以想到的做法就是递推。(dp)
+
+1745 subarray + palindrome 用dp[i][j] = dp[i+1][j-1] 可以先用特殊字符把array给变成奇数，然后以每个元素为中心找palindrome
+
+2272. Substring with largest variance
+substring navie approach 永远都是O(n^2)，但是怎么变成O(n)
+对于以第i个元素结尾的子串，我们想要通过O(1)找到它的起点或者说它的最大的variance，
+我们可以去保存之前的子串中其他字母和它的最大差值，然后直接相加即可。

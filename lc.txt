@@ -1,0 +1,93 @@
+1392 理解kmp的next含义
+1838 没有顺序的要求想到sort，sort后continuous联想sliding window
+1234 sliding window 的统计不一定是在window内部的，可以在外面，如果在外面，要先把它们都统计一遍用for
+30 得好好读题，题目才是解题的关键！
+2101 读题！有方向的图不能用union find
+754 遇到数学问题要找规律！
+1066 backtracking 想能不能memory
+1326 最小数量覆盖区间greedy，只找最大的
+2054 区间题可以试着将起点和终点都放着一个array里面排序处理，记得标注好起点和终点
+1673 monotonic stack的题目ans不一定只出现在stack内，可以是被stack排出的，要求k个，转换成n-k个排出的问题
+2305 伪装成binary search的backtrack，给定array找最大值分k组不一定是binary search，注意看问题的规模
+1871 prefix和dp，再理解一下
+780 没有思路要逆推
+1953 没有明显思路的greedy要相信直觉
+1143 和 1035是一样的
+1143 模板经典题，找两个字符串的公共子串的长度，用dp[i][j] = max(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]+1) 来做
+2302 模板
+871 greedy+priority queue
+1124 sliding window究竟什么时候移动left？对于连续字串问题，不仅仅可以用sliding window，也可以用monotonic stack
+不要先想着方法，先用naive的方法，然后再想怎么改进。比如说要找(i, j)，可以固定j找最好的i
+需要重点刷一下单调栈
+prefix sum 是可以有加有减的
+729 经典题，如何判断一个区间[start, end]是否与一组区间重叠？用ordered set，我的思路是判断start是否在一个区间的内部，end是否在一个区间的内部，
+start end 是否包含了一个区间
+1665 超难数学题，greedy靠直觉
+873 dp的下标可以是组合状态，上一个状态和当前状态组合起来
+1147 backtracking 还可以贪心优化，不过需要证明，面试稍微吹算了
+
+1671 left LIS and right LIS and compute the sum
+300 LIS find the longest increasing subsequnce? O(n^2) dp 
+O(nlogn) binary search (find LIS directly, if cur element is larger than all elements in LIS, push back
+else replace the existing element in the subseq)
+1964 是300的变例，在找当前 s[0:i] 的LIS时，记录 s[i] 在LIS所处的位置
+2111 如何用最少的操作（改数字）将一个非递增array变为递增array，求出LIS的大小x，n-x即可
+新题，类似LIS是一个string题，subsequence相邻的字母的绝对差值在k以内，不能用binary search，因为subsequence不是sorted，
+因此用dp。dp是O(n^2)，我们可以去找在这个范围离我们最近的那2k+1个字母，这样就不用去对小的subsequence判断
+
+1043 subarray backtrack+memo
+
+1130 monotonic stack（trick）/  区间dp，将一个大的区间分成两个小的区间和两个小区间的最大数的乘积的和
+1259 同理，每划出一条线就会划分出两个图，将他们的可能数乘起来并加在一起
+
+996 要学会转换成更简单的问题，如果backtrack会重复，可以用hashtable存count
+同理1039
+
+1705 分析好时间复杂度，不要轻易否定一个看上去不太好的方法
+1802 给了一个非常大的scale，明显是binary search
+1798 consecutive --》dp  要先sort再dp！！！！
+
+2227 逆向思维，可以通过给定的单词来去找可能出现的加密字符串，而不是先将加密字符串解密再找是否存在字典里
+
+1631 在想着backtrack的时候可以想想能不能转换成一个图论问题（最小生成树，拓扑排序。。）
+
+1153 google思维题，需要好好想想不同的情况
+
+1696 找dp[i-k]  dp[i-k+1]  dp[i-k+2]  ...  dp[i-1] 的最大值
+用deque，如果i - deque.front == k, deque.pop_front()
+然后用deque维护一个非递增的单调栈，这样永远都能找到最大值
+滑动窗口最小值问题，需要用deque维护
+
+
+1642 greedy，先用梯子，如果没有梯子，再用砖头把最小的梯子替换掉，这样就可以保证在最近的楼用最长的梯子
+
+1537 双指针，遇到共同的就找最大值，没有则自己跟自己玩（求和
+
+815 graph找最短路径，不用说就是bfs
+1293 别抱着你那dp不放，试试bfs
+
+1969 快速幂。。。跳过把，数学题
+
+1943 前缀和，区间题的一种做法，类似于插旗法，把一个区间的起点和终点都列出来，放进一个vector里，
+如果是起点就加上区间值，如果是终点就减去区间值，就可以得到所有区间加起来的区间们的值
+
+835 复杂的问题用simulation或者枚举解就好了，注意一下问题的规模
+
+805 split array 记得是01背包，不过这题是枚举
+
+927 三等分，首先找到可能是三等分的点，把1的数量除以3，再用prefixsum即可。
+然后观察可知，最后一部分的值是固定的，因此我们只需要看前两部分是否能组成最后一部分的值即可。
+
+765 union find 好好读题，注意转化问题，把需要移动转换成边
+
+2250 注意题目要求，虽然是2维，但y轴被限制在100以内，可以枚举y轴，然后二分找大于等于x轴的数量
+
+1274 divide and conquer，想想算法书那个神奇的矩阵乘法，分块
+
+2328 topological sort，increasing array 实际上是一个拓扑排序，把矩阵每个元素看成是图的点，
+
+952 union find 
+O(n^2) 对于每一对数字，看他们是否有公因数，union find
+O(n)+O(m) 对于每一个数字，看合并他和他的因数，
+
+2272
